@@ -42,10 +42,8 @@ bool login(std::string username, std::string password) {
   return true;
 }
 
-void runAfterLogin(std::string username) {
-    std::cout << std::endl;
-    std::cout << "Welcome " << "\033[4m" << username << "\033[0m"<< " to our weird GPT! We are grateful that you have chosen to join us and we hope that we can be of assistance to you.\n Our team is dedicated to providing the best experience possible, and we are here to help with any questions or concerns you may have.\nThank you for being a part of our community, and we look forward to serving you." << std::endl;
-    std::cout << std::endl;
+void askgpt() {
+  std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "Ask GPT: " << "\033[4m";
     std::string input;
@@ -68,6 +66,10 @@ void runAfterLogin(std::string username) {
       std::string options[] = { "I'm good, thanks!", "I'm doing great!", "I'm feeling fantastic!", "Just surviving, thanks for asking.", "Just hacking, How are you?" };
       int randomIndex = std::rand() % 4;
       response = options[randomIndex];
+    } else if (input.find("need help") != std::string::npos) {
+      std::string options[] = { "How can I assist you?", "Of course! I'd be happy to help you. What do you need help with?", "Sure! Can you please specify what you need help with? I'd be happy to assist you in any way I can.", "What happend?", "Don't care" };
+      int randomIndex = std::rand() % 3;
+      response = options[randomIndex];
     } else {
       response = "Sorry, I don't understand what you're saying.";
     }
@@ -75,7 +77,14 @@ void runAfterLogin(std::string username) {
       std::cout << "\033[0m" << "\033[1m" << c << "\033[0m" << std::flush;
       Sleep(160);
     }
+    askgpt();
     std::cout << std::endl;
+}
+
+void runAfterLogin(std::string username) {
+    std::cout << std::endl;
+    std::cout << "Welcome " << "\033[4m" << username << "\033[0m"<< " to our weird GPT! We are grateful that you have chosen to join us and we hope that we can be of assistance to you.\n Our team is dedicated to providing the best experience possible, and we are here to help with any questions or concerns you may have.\nThank you for being a part of our community, and we look forward to serving you." << std::endl;
+    askgpt();
 }
 
 int main() {
